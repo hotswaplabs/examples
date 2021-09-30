@@ -1,16 +1,12 @@
 import flask
 import requests
-from requests.sessions import session
 
 app = flask.Flask(__name__)
 
 @app.route('/')
 def index():
-    params = {'api_key': '{YOUR API KEY}'}
     data = {
-        # This can be any identifier: user ID, email address, username, etc.
-        # Required.
-        'user_id': '{unique user id}',
+        'api_key': 'YOUR API KEY',
 
         # If you want to "bootstrap" the widget with specific parameters for the 
         # user, then you can pass them in here.
@@ -26,8 +22,7 @@ def index():
     # Creates a new migration session
     rc = requests.post(
         'https://widget.hotswap.app/api/sessions',
-        params=params,
-        data=data
+        json=data
     ).json()
 
     token = rc['token']
